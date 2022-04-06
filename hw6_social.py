@@ -116,7 +116,9 @@ Parameters: dataframe ; str
 Returns: str
 '''
 def getRegionFromState(stateDf, state):
-    return
+    find_region = stateDf.loc[stateDf["state"] == state,'region']
+    #print(find_region)
+    return find_region.values[0]
 
 
 '''
@@ -312,6 +314,7 @@ if __name__ == "__main__":
     test.testParsePosition()
     test.testParseState()
     test.testFindHashtags()
+    test.testGetRegionFromState()
     ## Uncomment these for Week 2 ##
     """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     test.week2Tests()

@@ -34,7 +34,12 @@ Parameters: str
 Returns: str
 '''
 def parseName(fromString):
-    return
+    name = fromString 
+    name_label = name.split(':')[1].split('(')[0]
+       
+    #print(str(name_label)) 
+
+    return str(name_label.strip())
 
 
 '''
@@ -44,7 +49,10 @@ Parameters: str
 Returns: str
 '''
 def parsePosition(fromString):
-    return
+    position = fromString
+    position_label = position.split(':')[1].split('(')[1].split('from')[0]
+    #print(str(position_label.strip()))
+    return str(position_label.strip())
 
 
 '''
@@ -54,7 +62,10 @@ Parameters: str
 Returns: str
 '''
 def parseState(fromString):
-    return
+    state = fromString
+    state_label = state.split(':')[1].split('(')[1].split(')')[0].split('from')[1]
+    #print(state_label)
+    return (str(state_label.strip()))
 
 
 '''
@@ -266,6 +277,9 @@ if __name__ == "__main__":
     # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     # test.runWeek1()
     test.testMakeDataFrame()
+    test.testParseName()
+    test.testParsePosition()
+    test.testParseState()
     ## Uncomment these for Week 2 ##
     """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     test.week2Tests()

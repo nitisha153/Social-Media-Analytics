@@ -25,9 +25,8 @@ Parameters: str
 Returns: dataframe
 '''
 def makeDataFrame(filename):
-    return
-
-
+    df = pd.read_csv(filename)
+    return df
 '''
 parseName(fromString)
 #4 [Check6-1]
@@ -35,7 +34,12 @@ Parameters: str
 Returns: str
 '''
 def parseName(fromString):
-    return
+    name = fromString 
+    name_label = name.split(':')[1].split('(')[0]
+       
+    #print(str(name_label)) 
+
+    return str(name_label.strip())
 
 
 '''
@@ -45,7 +49,10 @@ Parameters: str
 Returns: str
 '''
 def parsePosition(fromString):
-    return
+    position = fromString
+    position_label = position.split(':')[1].split('(')[1].split('from')[0]
+    #print(str(position_label.strip()))
+    return str(position_label.strip())
 
 
 '''
@@ -55,7 +62,10 @@ Parameters: str
 Returns: str
 '''
 def parseState(fromString):
-    return
+    state = fromString
+    state_label = state.split(':')[1].split('(')[1].split(')')[0].split('from')[1]
+    #print(state_label)
+    return (str(state_label.strip()))
 
 
 '''
@@ -65,7 +75,38 @@ Parameters: str
 Returns: list of strs
 '''
 def findHashtags(message):
-    return
+    msg = message
+    hashtags = []
+    string = ""
+    tags = msg.split('#')
+    for index in range(1,len(tags)):
+        #print(word)
+        #i = 0
+        for char in tags[index]:
+            if char not in endChars:
+                string += char
+                #print(string)
+                #i += 1
+            else:
+                break
+        string = "#" + string
+        hashtags.append(string)
+        string =""
+    # for word in msg.split():
+    #     if word[0] == '#':
+    #         #print(word[0],word)
+    #         string = "#"
+    #         i = 1
+    #         while word[i] not in endChars:
+    #             string += word[i]
+    #             #print(word[i],i)
+    #             i += 1
+    #             if i == len(word):
+    #                 break
+
+    #         hashtags.append(string)
+    #print(hashtags)
+    return hashtags
 
 
 '''
@@ -75,7 +116,9 @@ Parameters: dataframe ; str
 Returns: str
 '''
 def getRegionFromState(stateDf, state):
-    return
+    find_region = stateDf.loc[stateDf["state"] == state,'region']
+    #print(find_region)
+    return find_region.values[0]
 
 
 '''
@@ -85,7 +128,31 @@ Parameters: dataframe ; dataframe
 Returns: None
 '''
 def addColumns(data, stateDf):
-    return
+    names = []
+    positions = []
+    states = []
+    regions = []
+    hashtags = []
+
+    for index,row in data.iterrows():
+        value = row['label']
+        name = parseName(value)
+        names.append(name)
+        position = parsePosition(value)
+        positions.append(position)
+        state = parseState(value)
+        states.append(state)
+        region = getRegionFromState(stateDf, state)
+        regions.append(region)
+        text_value = row['text']
+        hashtag = findHashtags(text_value)
+        hashtags.append(hashtag)
+    data['name'] = names
+    data['position'] = positions
+    data['state'] = states
+    data['region'] = regions
+    data['hashtags'] = hashtags
+    return None
 
 
 ### PART 2 ###
@@ -98,7 +165,12 @@ Returns: str
 '''
 def findSentiment(classifier, message):
     score = classifier.polarity_scores(message)['compound']
-    return
+    if score < -0.1:
+        return "negative"
+    elif score > 0.1:
+        return "positive"
+    else:
+        return "neutral"
 
 
 '''
@@ -262,11 +334,18 @@ def scatterPlot(xValues, yValues, labels, title):
 
 # This code runs the test cases to check your work
 if __name__ == "__main__":
-    print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
-    test.week1Tests()
-    print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
-    test.runWeek1()
-
+    # print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
+    # test.week1Tests()
+    # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
+    # test.runWeek1()
+    test.testMakeDataFrame()
+    test.testParseName()
+    test.testParsePosition()
+    test.testParseState()
+    test.testFindHashtags()
+    test.testGetRegionFromState()
+    test.testAddColumns()
+    test.testFindSentiment()
     ## Uncomment these for Week 2 ##
     """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     test.week2Tests()

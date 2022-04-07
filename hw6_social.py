@@ -307,7 +307,15 @@ Returns: None
 '''
 def graphStateCounts(stateCounts, title):
     import matplotlib.pyplot as plt
-    return
+    keys = list(stateCounts.keys())
+    values = list(stateCounts.values())
+    plt.bar(keys,values,width =0.9)
+    plt.xticks(rotation="vertical")
+    plt.xlabel("State Names")
+    plt.ylabel("No.of Messages per state")
+    plt.title(title)
+    plt.show()
+    return None
 
 
 '''
@@ -400,7 +408,7 @@ if __name__ == "__main__":
     # print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
     # test.week1Tests()
     # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
-    test.runWeek1()
+    #test.runWeek1()
     # test.testMakeDataFrame()
     # test.testParseName()
     # test.testParsePosition()
@@ -412,11 +420,11 @@ if __name__ == "__main__":
     # test.testAddSentimentColumn()
     # test.testGetDataCountByState()
     ## Uncomment these for Week 2 ##
-    print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
+    """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     test.week2Tests()
     print("\n" + "#"*15 + " WEEK 2 OUTPUT " + "#" * 15 + "\n")
-    test.runWeek2()
+    test.runWeek2()"""
 
     ## Uncomment these for Week 3 ##
-    """print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
-    test.runWeek3()"""
+    print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
+    test.runWeek3()

@@ -284,7 +284,17 @@ Parameters: dataframe ; str
 Returns: float
 '''
 def getHashtagSentiment(data, hashtag):
-    return
+    sum_sentiments = 0
+    total = 0
+    for index, row in data.iterrows():
+        msg = row['text']
+        if hashtag in msg:
+            total +=1
+            if row['sentiment'] == 'positive':
+                sum_sentiments += 1
+            if row['sentiment'] == 'negative':
+                sum_sentiments -= 1
+    return sum_sentiments/total
 
 
 ### PART 3 ###

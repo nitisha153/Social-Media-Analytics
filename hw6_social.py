@@ -65,7 +65,7 @@ def parseState(fromString):
     state = fromString
     state_label = state.split(':')[1].split('(')[1].split(')')[0].split('from')[1]
     #print(state_label)
-    return (str(state_label.strip()))
+    return state_label.strip()
 
 
 '''

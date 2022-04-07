@@ -25,9 +25,8 @@ Parameters: str
 Returns: dataframe
 '''
 def makeDataFrame(filename):
-    return
-
-
+    df = pd.read_csv(filename)
+    return df
 '''
 parseName(fromString)
 #4 [Check6-1]
@@ -35,7 +34,12 @@ Parameters: str
 Returns: str
 '''
 def parseName(fromString):
-    return
+    name = fromString 
+    name_label = name.split(':')[1].split('(')[0]
+       
+    #print(str(name_label)) 
+
+    return name_label.strip()
 
 
 '''
@@ -45,7 +49,10 @@ Parameters: str
 Returns: str
 '''
 def parsePosition(fromString):
-    return
+    position = fromString
+    position_label = position.split(':')[1].split('(')[1].split('from')[0]
+    #print(str(position_label.strip()))
+    return str(position_label.strip())
 
 
 '''
@@ -55,7 +62,10 @@ Parameters: str
 Returns: str
 '''
 def parseState(fromString):
-    return
+    state = fromString
+    state_label = state.split(':')[1].split('(')[1].split(')')[0].split('from')[1]
+    #print(state_label)
+    return state_label.strip()
 
 
 '''
@@ -262,11 +272,14 @@ def scatterPlot(xValues, yValues, labels, title):
 
 # This code runs the test cases to check your work
 if __name__ == "__main__":
-    print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
-    test.week1Tests()
-    print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
-    test.runWeek1()
-
+    # print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
+    # test.week1Tests()
+    # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
+    # test.runWeek1()
+    test.testMakeDataFrame()
+    test.testParseName()
+    test.testParsePosition()
+    test.testParseState()
     ## Uncomment these for Week 2 ##
     """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     test.week2Tests()

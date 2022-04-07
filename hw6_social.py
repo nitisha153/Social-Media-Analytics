@@ -380,7 +380,18 @@ Parameters: dataframe
 Returns: None
 '''
 def graphHashtagSentimentByFrequency(data):
-    return
+    tag_count = getHashtagRates(data)
+    most_common = mostCommonHashtags(tag_count,50)
+    hashtags =[]
+    frequencies =[]
+    sentiment_scores =[]
+    for hashtag in most_common:
+        hashtags.append(hashtag)
+        frequencies.append(most_common[hashtag])
+        sentiment_scores.append(getHashtagSentiment(data,hashtag))
+    scatterPlot(frequencies,sentiment_scores,hashtags,"Average Sentiment Score")
+
+    return None
 
 
 #### PART 3 PROVIDED CODE ####

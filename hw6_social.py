@@ -39,7 +39,7 @@ def parseName(fromString):
        
     #print(str(name_label)) 
 
-    return str(name_label.strip())
+    return name_label.strip()
 
 
 '''

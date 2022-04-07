@@ -39,7 +39,7 @@ def parseName(fromString):
        
     #print(str(name_label)) 
 
-    return str(name_label.strip())
+    return name_label.strip()
 
 
 '''
@@ -65,7 +65,7 @@ def parseState(fromString):
     state = fromString
     state_label = state.split(':')[1].split('(')[1].split(')')[0].split('from')[1]
     #print(state_label)
-    return (str(state_label.strip()))
+    return state_label.strip()
 
 
 '''
@@ -197,7 +197,22 @@ Parameters: dataframe ; str ; str
 Returns: dict mapping strs to ints
 '''
 def getDataCountByState(data, colName, dataToCount):
-    return
+    dict_state = {}
+    if colName != "" and dataToCount != "":
+        for index, row in data.iterrows():
+            state = row['state']
+            col = row[colName]
+            if col == dataToCount:
+                if state not in dict_state:
+                    dict_state[state] = 0
+                dict_state[state] += 1
+    else:
+        for index, row in data.iterrows():
+            state = row['state']
+            if state not in dict_state:
+                dict_state[state] = 0
+            dict_state[state] += 1
+    return dict_state
 
 
 '''
@@ -343,21 +358,22 @@ if __name__ == "__main__":
     # print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
     # test.week1Tests()
     # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
-    # test.runWeek1()
-    test.testMakeDataFrame()
-    test.testParseName()
-    test.testParsePosition()
-    test.testParseState()
-    test.testFindHashtags()
-    test.testGetRegionFromState()
-    test.testAddColumns()
-    test.testFindSentiment()
-    test.testAddSentimentColumn()
+    test.runWeek1()
+    # test.testMakeDataFrame()
+    # test.testParseName()
+    # test.testParsePosition()
+    # test.testParseState()
+    # test.testFindHashtags()
+    # test.testGetRegionFromState()
+    # test.testAddColumns()
+    # test.testFindSentiment()
+    # test.testAddSentimentColumn()
+    # test.testGetDataCountByState()
     ## Uncomment these for Week 2 ##
-    """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
+    print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     test.week2Tests()
     print("\n" + "#"*15 + " WEEK 2 OUTPUT " + "#" * 15 + "\n")
-    test.runWeek2()"""
+    test.runWeek2()
 
     ## Uncomment these for Week 3 ##
     """print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")

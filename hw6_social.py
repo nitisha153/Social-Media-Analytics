@@ -222,7 +222,17 @@ Parameters: dataframe ; str
 Returns: dict mapping strs to (dicts mapping strs to ints)
 '''
 def getDataForRegion(data, colName):
-    return
+    d = {}
+    for index, row in data.iterrows():
+        key = row['region']
+        if key not in d:
+            d[key] = {}
+        if row[colName] not in d[key]:
+            d[key][row[colName]] = 0
+        d[key][row[colName]] += 1
+
+    
+    return d
 
 
 '''

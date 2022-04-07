@@ -260,7 +260,21 @@ Parameters: dict mapping strs to ints ; int
 Returns: dict mapping strs to ints
 '''
 def mostCommonHashtags(hashtags, count):
-    return
+    # import heapq
+    mostcommon_tags = {}
+    # lst = heapq.nlargest(count,hashtags,key=hashtags.get)
+    # #print(lst)
+    # for tag in lst:
+    #     if hashtags[tag] not in mostcommon_tags:
+    #         mostcommon_tags[tag] = hashtags[tag]
+    d_descending = list(sorted(hashtags.items(), 
+                                  key=lambda kv: kv[1], reverse=True))
+    #print(d_descending)
+    for index in range(len(d_descending)):
+        if index <= count - 1:
+            mostcommon_tags[d_descending[index][0]] = d_descending[index][1]
+    
+    return mostcommon_tags
 
 
 '''

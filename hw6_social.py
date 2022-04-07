@@ -309,7 +309,7 @@ def graphStateCounts(stateCounts, title):
     import matplotlib.pyplot as plt
     keys = list(stateCounts.keys())
     values = list(stateCounts.values())
-    plt.bar(keys,values,width =0.9)
+    plt.bar(keys,values,width=0.9)
     plt.xticks(rotation="vertical")
     plt.xlabel("State Names")
     plt.ylabel("No.of Messages per state")

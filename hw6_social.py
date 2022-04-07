@@ -325,7 +325,16 @@ Parameters: dict mapping strs to ints ; dict mapping strs to ints ; int ; str
 Returns: None
 '''
 def graphTopNStates(stateCounts, stateFeatureCounts, n, title):
-    return
+    feature_rates ={}
+    for state in stateCounts:
+        if state in stateFeatureCounts:
+            frequency_rate = stateFeatureCounts[state]/stateCounts[state]
+            feature_rates[state] = frequency_rate
+    #to get top N states by using function mostCommonHashtags
+    top_N_states = mostCommonHashtags(feature_rates,n)
+    graphStateCounts(top_N_states,title) 
+
+    return None
 
 
 '''
